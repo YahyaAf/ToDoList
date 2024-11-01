@@ -187,11 +187,11 @@
               </select>
         </div>
         <div class="mb-3">
-              <select class="form-select" aria-label="Default select example">
+              <select id="action" class="form-select" aria-label="Default select example">
                 <option selected>Please select</option>
-                <option value="1">Do</option>
-                <option value="2">Doing</option>
-                <option value="3">Done</option>
+                <option value="do">Do</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
               </select>
         </div>
         
@@ -205,7 +205,8 @@
           <textarea class="form-control" id="description" rows="3"></textarea>
         </div>
 
-        <button type="submit" onclick="add()" class="btn btn-primary">Submit</button>
+        <button id="submit" type="submit" onclick="add()" class="btn btn-primary">Submit</button>
+        <button id="update" type="submit" class="btn btn-warning d-none">modifer</button>
         <button type="button" class="btn btn-secondary" id="cancel">cancel</button>
       </form>
       </div>
