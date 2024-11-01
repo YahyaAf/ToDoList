@@ -19,48 +19,50 @@ let data = [
 
 // fonction de affichage
 ReadAll = () => {
-    localStorage.setItem('object', JSON.stringify(data))
+    localStorage.setItem('object', JSON.stringify(data));
     var TodoTasks = document.getElementById('to-do-tasks');
-    
-    
+
+    // Retrieve tasks from localStorage
     var Object = localStorage.getItem('object');
     var ObjectData = JSON.parse(Object);
-    var elements = ""
+    var elements = "";
 
-    ObjectData.map(tasks => (
-        elements+=`
+    ObjectData.map((tasks, index) => (
+        elements += `
         <div class="border d-flex p-2 text-start ">
-                  <div class="me-2">
-                    <i class="fas fa-question-circle text-success"></i>
-                  </div>
-                  <div class="">
-                        <div class="fw-bold">
-                        ${tasks.title}
-                        </div>
-                        <div class="mt-1">
-                        <div class="text-muted">#1 created in ${tasks.date}</div>
-                        <div
-                            class=""
-                            title="There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly."
-                        >
-                            ${tasks.description}
-                        </div>
-                        </div>
-                        <div class="mt-1 mb-2">
-                        <span class="bg-primary p-1 rounded text-white">${tasks.level}</span>
-                        <span class="bg-muted p-1 text-black rounded">${tasks.type}</span>
-                        </div>
-                        <div class="mt-2">
-                            <button type='submit' class='bg-danger p-1 rounded text-white border-danger '>Delete</button>
-                            <button type='submit' class='bg-warning p-1 rounded text-white border-warning '>update</button>
-                        </div>
-                  </div>
+            <div class="fs-4 me-2">
+                <i class="fas fa-question-circle text-success"></i>
+            </div>
+            <div class="">
+                <div class="fw-bold fs-4">
+                    ${tasks.title}
+                </div>
+                <div class="mt-1 mb-3">
+                    <div class="text-muted fs-5">#${index + 1} created on ${tasks.date}</div>
+                    <div
+                        class='fs-5'
+                        title="Keep all up-to-date requirements and details in the main description. Even if information in comments may affect initial criteria, just update this primary description accordingly."
+                    >
+                        ${tasks.description}
+                    </div>
+                </div>
+                <div class="mt-1 mb-2">
+                    <span class="bg-primary p-1 rounded text-white">${tasks.level}</span>
+                    <span class="bg-muted p-1 text-black rounded">${tasks.type}</span>
+                </div>
+                <div class="mt-2">
+                    <button onclick="deleteItem(${index})" type="button" class="bg-danger p-1 rounded text-white border-danger">Delete</button>
+                    <button type="button" class="bg-warning p-1 rounded text-white border-warning">Update</button>
+                </div>
+            </div>
         </div>
         `
     ));
-    TodoTasks.innerHTML= elements;
-
+    
+    TodoTasks.innerHTML = elements;
 }
+
+
 
 add = () => {
     var titleN = document.getElementById('title').value;
@@ -85,3 +87,8 @@ add = () => {
     typeN = document.getElementById('type').checked=true;
 
 }
+
+deleteItem = (index) => {
+    data.splice(index, 1); 
+    ReadAll(); 
+};
