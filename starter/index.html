@@ -75,32 +75,6 @@
               </div>
               <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="in-progress-tasks">
                 <!-- IN PROGRESS TASKS HERE -->
-                <button class="d-flex p-2 text-start ">
-                  <div class="me-2">
-                    <i class="fas fa-spinner fa-spin text-success"></i>
-                  </div>
-                  <div class="">
-                    <div class="fw-bold">
-                      Keep all the updated requirements in one place
-                    </div>
-                    <div class="mt-1">
-                      <div class="text-muted">#1 created in 2022-10-08</div>
-                      <div
-                        class=""
-                        title="There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly."
-                      >
-                        There is hardly anything more frustrating than having
-                        t...
-                      </div>
-                    </div>
-                    <div class="mt-1 mb-2">
-                      <span class="bg-primary p-1 rounded text-white">High</span>
-                      <span class="bg-muted p-1 text-black rounded">Feature</span>
-                    </div>
-                  </div>
-                </button>
-
-
                 
               </div>
             </div>
@@ -112,30 +86,7 @@
               </div>
               <div class="list-group list-group-flush rounded-bottom overflow-hidden panel-body p-0" id="done-tasks">
                 <!-- DONE TASKS HERE -->
-                <button class="d-flex p-2 text-start ">
-                  <div class="me-2">
-                    <i class="fas fa-check-circle text-success"></i>
-                  </div>
-                  <div class="">
-                    <div class="fw-bold">
-                      Keep all the updated requirements in one place
-                    </div>
-                    <div class="mt-1">
-                      <div class="text-muted">#1 created in 2022-10-08</div>
-                      <div
-                        class=""
-                        title="There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly."
-                      >
-                        There is hardly anything more frustrating than having
-                        t...
-                      </div>
-                    </div>
-                    <div class="mt-1 mb-2">
-                      <span class="bg-primary p-1 rounded text-white">High</span>
-                      <span class="bg-muted p-1 text-black rounded">Feature</span>
-                    </div>
-                  </div>
-                </button>
+                
                 
               </div>
             </div>
@@ -164,19 +115,15 @@
           <label  class="form-label">Title</label>
           <input type="text" class="form-control" id="title">
         </div>
-        <div class="mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" value="Feature" id="type">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Feature
-                </label>
-        </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="type" value="Bug" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Bug
-                </label>
-            </div>
+        <div id="rates" class="mb-3">
+          <label class="form-check">
+              <input type="radio" name="rate" value="Feature" class="form-check-input" onchange="showValue()">
+              <span class="form-check-label">Feature</span>
+          </label>
+          <label class="form-check">
+              <input type="radio" name="rate" value="Bug" class="form-check-input" onchange="showValue()">
+              <span class="form-check-label">Bug</span>
+          </label>
         </div>
         <div class="mb-3">
               <select id="level" class="form-select" aria-label="Default select example">
