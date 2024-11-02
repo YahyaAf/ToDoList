@@ -153,25 +153,67 @@ function showValue() {
     }
 }
 
-add = () => {
-    var titleN = document.getElementById('title').value;
-    var dateN = document.getElementById('date').value;
-    var descriptionN = document.getElementById('description').value;
-    var levelN = document.getElementById('level').value;
-    var actionN = document.getElementById('action').value;
+validation = () => {
+    var titleN = document.getElementById('title');
+    var dateN = document.getElementById('date');
+    var descriptionN = document.getElementById('description');
+    var levelN = document.getElementById('level');
+    var actionN = document.getElementById('action');
     var typeN = showValue();
 
-    var newObj= {title: titleN,date:dateN,description:descriptionN,level:levelN,action:actionN,type:typeN}
-    data.push(newObj);
+    if(titleN.value.trim() == ""){
+        alert("Veuillez entrer le titre ! ");
+        return false;
+    }
 
-    document.getElementById('form-div').classList.add('d-none');
-    document.getElementById('app').style.filter = "";
-    document.getElementById('app').style.backgroundColor = "";
+    if(dateN.value.trim() == ""){
+        alert("Veuillez entrer une date ! ");
+        return false;
+    }
 
-    // localStorage.setItem('object', JSON.stringify(data));
+    if(descriptionN.value.trim() == ""){
+        alert("Veuillez entrer une description ! ");
+        return false;
+    }
+
+    if(levelN.value.trim() == ""){
+        alert("Veuillez selectionnez level  ! ");
+        return false;
+    }
+
+    if(actionN.value.trim() == ""){
+        alert("Veuillez selectionnez l'action ! ");
+        return false;
+    }
+
+    if(!typeN){
+        alert("Veuillez selectionnez le type ! ");
+        return false;
+    }
+
+    return true;
+}
+
+add = () => {
+    if(validation() == true){
+        var titleN = document.getElementById('title').value;
+        var dateN = document.getElementById('date').value;
+        var descriptionN = document.getElementById('description').value;
+        var levelN = document.getElementById('level').value;
+        var actionN = document.getElementById('action').value;
+        var typeN = showValue();
+
+        var newObj= {title: titleN,date:dateN,description:descriptionN,level:levelN,action:actionN,type:typeN}
+        data.push(newObj);
+
+        document.getElementById('form-div').classList.add('d-none');
+        document.getElementById('app').style.filter = "";
+        document.getElementById('app').style.backgroundColor = "";
+
+        // localStorage.setItem('object', JSON.stringify(data));
+        reset();
+    }
     ReadAll();
-
-    reset();
 
 }
 
@@ -198,9 +240,9 @@ updateItem = (index) => {
     var typeInputs = document.getElementsByName('rate');
     typeInputs.forEach((input) => {
         if (input.value === data[index].type) {
-            input.checked = true; // Check the matching radio button
+            input.checked = true; 
         } else {
-            input.checked = false; // Ensure others are unchecked
+            input.checked = false; 
         }
     });
 
