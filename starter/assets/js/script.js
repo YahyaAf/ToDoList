@@ -101,21 +101,21 @@ ReadAll = () => {
                         <i class="fas fa-check-circle text-success"></i>
                     </div>
                     <div class="">
-                        <div class="fw-bold fs-4">
+                        <div class="fw-bold fs-4 text-decoration-line-through">
                             ${tasks.title}
                         </div>
                         <div class="mt-1 mb-3">
-                            <div class="text-muted fs-5">#${index + 1} created on ${tasks.date}</div>
+                            <div class="text-muted fs-5 text-decoration-line-through">#${index + 1} created on ${tasks.date}</div>
                             <div
-                                class='fs-5'
+                                class='fs-5 text-decoration-line-through'
                                 title="Keep all up-to-date requirements and details in the main description. Even if information in comments may affect initial criteria, just update this primary description accordingly."
                             >
                                 ${tasks.description}
                             </div>
                         </div>
                         <div class="mt-1 mb-2">
-                            <span class="bg-primary p-1 rounded text-white">${tasks.level}</span>
-                            <span class="bg-muted p-1 text-black rounded">${tasks.type}</span>
+                            <span class="bg-primary p-1 rounded text-white text-decoration-line-through">${tasks.level}</span>
+                            <span class="bg-muted p-1 text-black rounded text-decoration-line-through">${tasks.type}</span>
                         </div>
                         <div class="mt-2">
                             <button onclick="deleteItem(${index})" type="button" class="bg-danger p-1 rounded text-white border-danger">Delete</button>
