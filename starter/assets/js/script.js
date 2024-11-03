@@ -48,11 +48,12 @@ const ReadAll = () => {
                     <div class="mt-2">
                         <button onclick="deleteItem(${index})" type="button" class="bg-danger p-1 rounded text-white border-danger">Delete</button>
                         <button onclick="updateItem(${index})" type="button" class="bg-warning p-1 rounded text-white border-warning">Update</button>
+                        <button onclick="showById(${index})" type="button" class="bg-primary p-1 rounded text-white border-primary">Detail</button>
                     </div>
                 </div>
             </div>
         `;
-
+    
         // Append task HTML to the appropriate column
         if (tasks.action === "do") {
             elementsTodo += taskHTML;
@@ -105,12 +106,12 @@ const validation = () => {
         return false;
     }
 
-    if (levelN.selectedIndex === 0) { // Vérifie si c'est la première option
+    if (levelN.selectedIndex === 0) { 
         alert("Veuillez sélectionner un niveau !");
         return false;
     }
 
-    if (actionN.selectedIndex === 0) { // Vérifie si c'est la première option
+    if (actionN.selectedIndex === 0) { 
         alert("Veuillez sélectionner une action !");
         return false;
     }
@@ -153,7 +154,7 @@ const add = () => {
         document.getElementById('form-div').classList.add('d-none');
         document.getElementById('app').style.filter = "";
         document.getElementById('app').style.backgroundColor = "";
-        
+
     } else {
         document.getElementById('form-div').classList.remove('d-none');
         document.getElementById('app').style.filter = "blur(5px)";
@@ -203,5 +204,45 @@ const updateItem = (index) => {
         }
     };
 }
+
+const showById = (index) => {
+    const task = data[index]; 
+    if (!task) return; 
+    document.getElementById('detail').innerHTML = `
+        <div style="width: 50%; max-width: 600px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;" class="mx-auto bg-white p-3 rounded position-absolute top-50 start-50 translate-middle">
+            <div class="fs-4 me-2">
+                <i class="fas ${task.action === 'do' ? 'fa-question-circle' : task.action === 'doing' ? 'fa-spinner fa-spin' : 'fa-check-circle'} text-success"></i>
+            </div>
+            <div>
+                <h4 class="mb-2">
+                    <div class="fw-bold fs-4 ${task.action === 'done' ? 'text-decoration-line-through' : ''}">
+                        ${task.title}
+                    </div>
+                </h4>
+                <div class="mt-3 mb-3">
+                    <h4 class="text-blue mb-2">Date :</h4>
+                    <div class="text-muted fs-5 ${task.action === 'done' ? 'text-decoration-line-through' : ''}">#${index + 1} created on ${task.date}</div>
+                    <h4 class="text-blue mb-2 mt-3">Description :</h4>
+                    <div class="fs-5 ${task.action === 'done' ? 'text-decoration-line-through' : ''}">
+                        ${task.description}
+                    </div>
+                </div>
+                <div class="mt-1 mb-2">
+                    <h4 class="text-blue mb-3">Level of task :</h4>
+                    <span class="bg-primary p-1 rounded text-white ${task.action === 'done' ? 'text-decoration-line-through' : ''} mb-5">${task.level}</span>
+                    <h4 class="text-blue mb-3 mt-3">Type of task :</h4>
+                    <span class="bg-muted p-1 text-black rounded ${task.action === 'done' ? 'text-decoration-line-through' : ''} mb-3">${task.type}</span>
+                </div>
+                <div class="mt-2">
+                    <button type="button" class="btn btn-secondary mt-4" id="cancelDetail">Cancel</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('cancelDetail').addEventListener('click', () => {
+        document.getElementById('detail').innerHTML = ''; 
+    });
+};
 
 ReadAll(); 
