@@ -219,8 +219,16 @@ const updateItem = (index) => {
     document.getElementById('description').value = data[index].description;
     document.getElementById('level').value = data[index].level;
     document.getElementById('action').value = data[index].action;
-
     document.querySelectorAll('input[name="rate"]').forEach(input => input.checked = (input.value === data[index].type));
+
+    document.getElementById('cancel').addEventListener('click', function() {
+        document.getElementById('form-div').classList.add('d-none');
+        document.getElementById('app').style.filter = "";
+        document.getElementById('app').style.backgroundColor = "";
+        document.getElementById('update').classList.add('d-none');
+        document.getElementById('submit').classList.remove('d-none');
+        reset();
+    });
 
     document.getElementById('update').onclick = () => {
         if (validation()) {
@@ -238,6 +246,7 @@ const updateItem = (index) => {
             document.getElementById('app').style.backgroundColor = "";
             document.getElementById('update').classList.add('d-none');
             document.getElementById('submit').classList.remove('d-none');
+
             reset();
             ReadAll();
             showWarningAlert();
