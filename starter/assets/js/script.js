@@ -78,6 +78,38 @@ const reset = () => {
     document.querySelectorAll('input[name="rate"]').forEach(input => input.checked = false);
 }
 
+// Affichage de l'alerte de succès 
+const showSuccessAlert = () => {
+    let succes = document.getElementById('succes')
+    succes.innerHTML = `<b>The Task add succes !! </b>`;
+    succes.classList.remove('d-none');
+    setTimeout(() => {
+        succes.classList.add('d-none');
+    }, 1000);
+}
+
+// Affichage de l'alerte danger
+const showDangerAlert = () => {
+    let danger = document.getElementById('danger')
+    danger.innerHTML = `<b>Votre Task a été supprimer !! </b>`;
+    danger.classList.remove('d-none');
+    setTimeout(() => {
+        danger.classList.add('d-none');
+    }, 1000);
+}
+
+// Affichage de l'alerte Warning
+const showWarningAlert = () => {
+    let warning = document.getElementById('warning')
+    warning.innerHTML = `<b>Votre Task a été modifier !! </b>`;
+    warning.classList.remove('d-none');
+    setTimeout(() => {
+        warning.classList.add('d-none');
+    }, 1000);
+} 
+
+
+
 const showValue = () => {
     var selectedRate = document.querySelector('input[name="rate"]:checked');
     return selectedRate ? selectedRate.value : null;
@@ -155,17 +187,24 @@ const add = () => {
         document.getElementById('app').style.filter = "";
         document.getElementById('app').style.backgroundColor = "";
 
+        showSuccessAlert();
+
     } else {
         document.getElementById('form-div').classList.remove('d-none');
         document.getElementById('app').style.filter = "blur(5px)";
         document.getElementById('app').style.backgroundColor = "rgba(255, 255, 255, 0.5)";
     }
+
+    
 };
 
 const deleteItem = (index) => {
-    data.splice(index, 1); 
-    localStorage.setItem('object', JSON.stringify(data));
-    ReadAll(); 
+    if(confirm("Are u sure u need to delete this task ! ")){
+        data.splice(index, 1); 
+        localStorage.setItem('object', JSON.stringify(data));
+        ReadAll();
+    }
+    showDangerAlert(); 
 };
 
 const updateItem = (index) => {
@@ -201,11 +240,15 @@ const updateItem = (index) => {
             document.getElementById('submit').classList.remove('d-none');
             reset();
             ReadAll();
+            showWarningAlert();
         }
     };
 }
 
 const showById = (index) => {
+    document.getElementById('app').style.filter = "blur(5px)";
+    document.getElementById('app').style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+
     const task = data[index]; 
     if (!task) return; 
     document.getElementById('detail').innerHTML = `
@@ -242,6 +285,8 @@ const showById = (index) => {
 
     document.getElementById('cancelDetail').addEventListener('click', () => {
         document.getElementById('detail').innerHTML = ''; 
+        document.getElementById('app').style.filter = "";
+        document.getElementById('app').style.backgroundColor = "";
     });
 };
 
