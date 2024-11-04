@@ -11,6 +11,10 @@ document.getElementById('cancel').addEventListener('click', function() {
     reset();
 });
 
+// disable le button 
+
+
+
 let data = JSON.parse(localStorage.getItem('object')) || [];
 
 
@@ -184,7 +188,6 @@ const validation = () => {
         alert("Veuillez selectionnez le type !");
         return false;
     }
-
     return true;
 };
 
@@ -235,8 +238,9 @@ const deleteItem = (index) => {
         data.splice(index, 1); 
         localStorage.setItem('object', JSON.stringify(data));
         ReadAll();
+        showDangerAlert(); 
     }
-    showDangerAlert(); 
+    
 };
 
 const updateItem = (index) => {
@@ -331,17 +335,34 @@ const showById = (index) => {
     });
 };
 
-const counterOfTasks = () => {
-    let readCounter = document.getElementById('to-do-tasks-count');
-    let counter = 0;
 
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].action === "do") {
-            counter += 1;
-        }
+// Keyup event listeners for text inputs
+document.getElementById('title').addEventListener('keyup', isEmpty);
+document.getElementById('date').addEventListener('keyup', isEmpty);
+document.getElementById('description').addEventListener('keyup', isEmpty);
+document.getElementById('level').addEventListener('keyup', isEmpty);
+document.getElementById('action').addEventListener('keyup', isEmpty);
+
+// Change event listener for radio buttons
+const radioButtons = document.querySelectorAll('input[name="rate"]');
+radioButtons.forEach(radio => radio.addEventListener('change', isEmpty));
+
+// Function to enable/disable submit button
+function isEmpty() {
+    var titleN = document.getElementById('title').value.trim();
+    var dateN = document.getElementById('date').value.trim();
+    var descriptionN = document.getElementById('description').value.trim();
+    var levelN = document.getElementById('level').value.trim();
+    var actionN = document.getElementById('action').value.trim();
+    var typeN = showValue();
+
+    if (titleN !== '' && dateN !== '' && descriptionN !== '' && levelN !== '' && actionN !== '' && typeN !== null) {
+        document.getElementById('submit').removeAttribute('disabled');
+    } else {
+        document.getElementById('submit').setAttribute('disabled', 'true');
     }
-    console.log(counter)
-    readCounter.innerHTML = counter;
 }
+
+ 
 
 ReadAll(); 
