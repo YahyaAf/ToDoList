@@ -62,11 +62,43 @@ const ReadAll = () => {
         } else if (tasks.action === "done") {
             elementsDone += taskHTML;
         }
+
+        // add counter of chaque task
+        let countTodo = 0;
+        let countDoing = 0;
+        let countDone = 0;
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].action === "do") {
+                countTodo += 1;
+            }
+        }
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].action === "doing") {
+                countDoing += 1;
+            }
+        }
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].action === "done") {
+                countDone += 1;
+            }
+        }
+
+        // affiche counter of tasks
+        let counterOfTodo = document.getElementById('to-do-tasks-count');
+        let counterOfDoing = document.getElementById('in-progress-tasks-count');
+        let counterOfDone = document.getElementById('done-tasks-count');
+        counterOfTodo.innerHTML= countTodo;
+        counterOfDoing.innerHTML= countDoing;
+        counterOfDone.innerHTML= countDone;
     });
     
+    // affiche les tasks
     TodoTasks.innerHTML = elementsTodo;
     Doing.innerHTML = elementsDoing;
     Done.innerHTML = elementsDone;
+
+    
 };
 
 const reset = () => {
@@ -188,7 +220,7 @@ const add = () => {
         document.getElementById('app').style.backgroundColor = "";
 
         showSuccessAlert();
-
+        
     } else {
         document.getElementById('form-div').classList.remove('d-none');
         document.getElementById('app').style.filter = "blur(5px)";
@@ -298,5 +330,18 @@ const showById = (index) => {
         document.getElementById('app').style.backgroundColor = "";
     });
 };
+
+const counterOfTasks = () => {
+    let readCounter = document.getElementById('to-do-tasks-count');
+    let counter = 0;
+
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].action === "do") {
+            counter += 1;
+        }
+    }
+    console.log(counter)
+    readCounter.innerHTML = counter;
+}
 
 ReadAll(); 
