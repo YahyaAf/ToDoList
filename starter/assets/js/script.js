@@ -335,33 +335,38 @@ const showById = (index) => {
     });
 };
 
+verifierSubmit = () => {
+    // Keyup event listeners for text inputs
+    document.getElementById('title').addEventListener('keyup', isEmpty);
+    document.getElementById('date').addEventListener('keyup', isEmpty);
+    document.getElementById('description').addEventListener('keyup', isEmpty);
+    document.getElementById('level').addEventListener('keyup', isEmpty);
+    document.getElementById('action').addEventListener('keyup', isEmpty);
 
-// Keyup event listeners for text inputs
-document.getElementById('title').addEventListener('keyup', isEmpty);
-document.getElementById('date').addEventListener('keyup', isEmpty);
-document.getElementById('description').addEventListener('keyup', isEmpty);
-document.getElementById('level').addEventListener('keyup', isEmpty);
-document.getElementById('action').addEventListener('keyup', isEmpty);
+    // Change event listener for radio buttons
+    const radioButtons = document.querySelectorAll('input[name="rate"]');
+    radioButtons.forEach(radio => radio.addEventListener('change', isEmpty));
 
-// Change event listener for radio buttons
-const radioButtons = document.querySelectorAll('input[name="rate"]');
-radioButtons.forEach(radio => radio.addEventListener('change', isEmpty));
+    // Function to enable/disable submit button
+    function isEmpty() {
+        var titleN = document.getElementById('title').value.trim();
+        var dateN = document.getElementById('date').value.trim();
+        var descriptionN = document.getElementById('description').value.trim();
+        var levelN = document.getElementById('level').value.trim();
+        var actionN = document.getElementById('action').value.trim();
+        var typeN = showValue();
 
-// Function to enable/disable submit button
-function isEmpty() {
-    var titleN = document.getElementById('title').value.trim();
-    var dateN = document.getElementById('date').value.trim();
-    var descriptionN = document.getElementById('description').value.trim();
-    var levelN = document.getElementById('level').value.trim();
-    var actionN = document.getElementById('action').value.trim();
-    var typeN = showValue();
-
-    if (titleN !== '' && dateN !== '' && descriptionN !== '' && levelN !== '' && actionN !== '' && typeN !== null) {
-        document.getElementById('submit').removeAttribute('disabled');
-    } else {
-        document.getElementById('submit').setAttribute('disabled', 'true');
+        if (titleN !== '' && dateN !== '' && descriptionN !== '' && levelN !== '' && actionN !== '' && typeN !== null) {
+            document.getElementById('submit').removeAttribute('disabled');
+        } else {
+            document.getElementById('submit').setAttribute('disabled', 'true');
+        }
     }
+
 }
+verifierSubmit();
+
+
 
  
 
