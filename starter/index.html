@@ -23,6 +23,7 @@
     <link href="assets/css/default/app.min.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
+     
   </head>
   <body onload="ReadAll()">
     <!-- BEGIN #app -->
@@ -33,14 +34,14 @@
           <div>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-              <li class="breadcrumb-item active">Scrum Board</li>
+              <li class="breadcrumb-item active">To Do(List)</li>
             </ol>
             <!-- BEGIN page-header -->
-            <h1 class="page-header mb-0">Scrum Board</h1>
+            <h1 class="page-header mb-0">To Do(List)</h1>
             <!-- END page-header -->
           </div>
 
-
+          
           <!-- add succes -->
           <div id="succes" style="width: 50%;" class="d-none alert alert-success mx-auto" role="alert">
           </div>
@@ -66,6 +67,9 @@
               ><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Add
               Task</a
             >
+            <button type="button" class="btn btn-outline-secondary btn-rounded px-4 rounded-pill" id="darkModeToggle">
+              <i class="fas fa-moon"></i> Dark Mode
+            </button>
           </div>
         </div>
         <div id="div-row" class="row">
