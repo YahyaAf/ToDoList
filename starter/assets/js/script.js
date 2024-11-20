@@ -31,28 +31,43 @@ const ReadAll = () => {
     
     data.forEach((tasks, index) => {
         let taskHTML = `
-            <div class="border d-flex p-2 text-start">
-                <div class="fs-4 me-2">
-                    <i class="fas ${tasks.action === 'do' ? 'fa-question-circle' : tasks.action === 'doing' ? 'fa-spinner fa-spin' : 'fa-check-circle'} text-success"></i>
-                </div>
-                <div>
-                    <div class="fw-bold fs-4 ${tasks.action === 'done' ? 'text-decoration-line-through' : ''}">
-                        ${tasks.title}
+            <div class="card mb-3 shadow-sm border-0">
+                <div class="card-body d-flex align-items-start">
+                    <!-- Icon Section -->
+                    <div class="me-3">
+                        <i class="fas ${tasks.action === 'do' ? 'fa-question-circle text-secondary' : tasks.action === 'doing' ? 'fa-spinner fa-spin text-warning' : 'fa-check-circle text-success'} fs-3"></i>
                     </div>
-                    <div class="mt-1 mb-3">
-                        <div class="text-muted fs-5 ${tasks.action === 'done' ? 'text-decoration-line-through' : ''}">#${index + 1} created on ${tasks.date}</div>
-                        <div class="fs-5 ${tasks.action === 'done' ? 'text-decoration-line-through' : ''}">
+
+                    <!-- Task Details Section -->
+                    <div class="w-100">
+                        <h5 class="card-title fw-bold ${tasks.action === 'done' ? 'text-decoration-line-through text-muted' : ''}">
+                            ${tasks.title}
+                        </h5>
+                        <p class="card-text mb-1 ${tasks.action === 'done' ? 'text-decoration-line-through text-muted' : ''}">
+                            <small class="text-muted">#${index + 1} created on ${tasks.date}</small>
+                        </p>
+                        <p class="card-text ${tasks.action === 'done' ? 'text-decoration-line-through text-muted' : ''}">
                             ${tasks.description}
+                        </p>
+
+                        <!-- Labels Section -->
+                        <div class="mb-3">
+                            <span class="badge bg-primary me-1 ${tasks.action === 'done' ? 'bg-secondary' : ''}">${tasks.level}</span>
+                            <span class="badge bg-secondary ${tasks.action === 'done' ? 'bg-light text-dark' : ''}">${tasks.type}</span>
                         </div>
-                    </div>
-                    <div class="mt-1 mb-2">
-                        <span class="bg-primary p-1 rounded text-white ${tasks.action === 'done' ? 'text-decoration-line-through' : ''}">${tasks.level}</span>
-                        <span class="bg-muted p-1 text-black rounded ${tasks.action === 'done' ? 'text-decoration-line-through' : ''}">${tasks.type}</span>
-                    </div>
-                    <div class="mt-2">
-                        <button onclick="deleteItem(${index})" type="button" class="bg-danger p-1 rounded text-white border-danger">Delete</button>
-                        <button onclick="updateItem(${index})" type="button" class="bg-warning p-1 rounded text-white border-warning">Update</button>
-                        <button onclick="showById(${index})" type="button" class="bg-primary p-1 rounded text-white border-primary">Detail</button>
+
+                        <!-- Action Buttons -->
+                        <div>
+                            <button onclick="deleteItem(${index})" type="button" class="btn btn-danger btn-sm me-2">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                            <button onclick="updateItem(${index})" type="button" class="btn btn-warning btn-sm me-2">
+                                <i class="fas fa-edit"></i> Update
+                            </button>
+                            <button onclick="showById(${index})" type="button" class="btn btn-primary btn-sm">
+                                <i class="fas fa-info-circle"></i> Detail
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,35 +312,50 @@ const showById = (index) => {
     const task = data[index]; 
     if (!task) return; 
     document.getElementById('detail').innerHTML = `
-        <div style="width: 50%; max-width: 600px; word-wrap: break-word; overflow-wrap: break-word; white-space: normal;" class="mx-auto bg-white p-3 rounded position-absolute top-50 start-50 translate-middle">
-            <div class="fs-4 me-2">
-                <i class="fas ${task.action === 'do' ? 'fa-question-circle' : task.action === 'doing' ? 'fa-spinner fa-spin' : 'fa-check-circle'} text-success"></i>
-            </div>
-            <div>
-                <h4 class="mb-2">
-                    <div class="fw-bold fs-4 ${task.action === 'done' ? 'text-decoration-line-through' : ''}">
+            <div class="card mx-auto bg-white p-4 rounded position-absolute top-50 start-50 translate-middle" style="max-width: 600px; width: 100%; word-wrap: break-word; overflow-wrap: break-word;">
+                <div class="align-items-center">
+                    <i class="fas ${task.action === 'do' ? 'fa-question-circle text-secondary' : task.action === 'doing' ? 'fa-spinner fa-spin text-warning' : 'fa-check-circle text-success'} fs-3 me-3"></i>
+                    <h4 class="fw-bold mb-0 ${task.action === 'done' ? 'text-decoration-line-through text-muted' : ''}" style="word-wrap: break-word; overflow-wrap: break-word;">
                         ${task.title}
-                    </div>
-                </h4>
-                <div class="mt-3 mb-3">
-                    <h4 class="text-blue mb-2">Date :</h4>
-                    <div class="text-muted fs-5 ${task.action === 'done' ? 'text-decoration-line-through' : ''}">#${index + 1} created on ${task.date}</div>
-                    <h4 class="text-blue mb-2 mt-3">Description :</h4>
-                    <div class="fs-5 ${task.action === 'done' ? 'text-decoration-line-through' : ''}">
-                        ${task.description}
-                    </div>
+                    </h4>
                 </div>
-                <div class="mt-1 mb-2">
-                    <h4 class="text-blue mb-3">Level of task :</h4>
-                    <span class="bg-primary p-1 rounded text-white ${task.action === 'done' ? 'text-decoration-line-through' : ''} mb-5">${task.level}</span>
-                    <h4 class="text-blue mb-3 mt-3">Type of task :</h4>
-                    <span class="bg-muted p-1 text-black rounded ${task.action === 'done' ? 'text-decoration-line-through' : ''} mb-3">${task.type}</span>
-                </div>
-                <div class="mt-2">
-                    <button type="button" class="btn btn-secondary mt-4" id="cancelDetail">Cancel</button>
+                <div class="card-body">
+                    <!-- Date Section -->
+                    <div class="mb-3">
+                        <h5 class="text-primary">Date:</h5>
+                        <p class="text-muted fs-6 ${task.action === 'done' ? 'text-decoration-line-through' : ''}" style="word-wrap: break-word; overflow-wrap: break-word;">
+                            #${index + 1} created on ${task.date}
+                        </p>
+                    </div>
+
+                    <!-- Description Section -->
+                    <div class="mb-3">
+                        <h5 class="text-primary">Description:</h5>
+                        <p class="fs-6 ${task.action === 'done' ? 'text-decoration-line-through' : ''}" style="word-wrap: break-word; overflow-wrap: break-word;">
+                            ${task.description}
+                        </p>
+                    </div>
+
+                    <!-- Level Section -->
+                    <div class="mb-3">
+                        <h5 class="text-primary">Level of Task:</h5>
+                        <span class="badge bg-primary ${task.action === 'done' ? 'bg-secondary' : ''}">${task.level}</span>
+                    </div>
+
+                    <!-- Type Section -->
+                    <div class="mb-3">
+                        <h5 class="text-primary">Type of Task:</h5>
+                        <span class="badge bg-secondary ${task.action === 'done' ? 'bg-light text-dark' : ''}">${task.type}</span>
+                    </div>
+
+                    <!-- Cancel Button -->
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-danger btn-sm mt-3" id="cancelDetail">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
     `;
 
     document.getElementById('cancelDetail').addEventListener('click', () => {
